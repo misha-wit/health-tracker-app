@@ -1,37 +1,65 @@
 package org.wit.repository
 
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.wit.db.Users
 import org.wit.domain.UserDTO
-
+import org.wit.util.mapToUserDTO
 class UserDAO {
 
-    private val users = arrayListOf<UserDTO>(
-        UserDTO(name = "Alice", email = "alice@wonderland.com", id = 0),
-        UserDTO(name = "Bob", email = "bob@cat.ie", id = 1),
-        UserDTO(name = "Mary", email = "mary@contrary.com", id = 2),
-        UserDTO(name = "Carol", email = "carol@singer.com", id = 3)
-    )
 
     fun getAll() : ArrayList<UserDTO>{
-        return users
+        val userList: ArrayList<UserDTO> = arrayListOf()
+        transaction {
+            Users.selectAll().map {
+                userList.add(mapToUserDTO(it)) }
+        }
+        return userList
     }
 
     fun findById(id: Int): UserDTO?{
-        return users.find {it.id == id}
+        return transaction {
+            Users.select() {
+                Users.id eq id}
+                .map{mapToUserDTO(it)}
+                .firstOrNull()
+        }
     }
 
     fun save(userDTO: UserDTO){
-        users.add(userDTO)
+        transaction {
+            Users.insert {
+                it[id] = userDTO.id
+                it[name] = userDTO.name
+                it[email] = userDTO.email
+            }
+        }
     }
 
     fun findByEmail(email: String) :UserDTO?{
-        return users.find {it.email == email}
+        return transaction {
+            Users.select() {
+                Users.email eq email}
+                .map{mapToUserDTO(it)}
+                .firstOrNull()
+        }
     }
 
-    fun delete(id: Int){
-        users.remove(users.find {it.id == id})
+    fun delete(id: Int):Int{
+        return transaction{ Users.deleteWhere {
+            Users.id eq id
+        }
+        }
     }
 
     fun update(id: Int, userDTO: UserDTO){
-        users[id] = userDTO
+        transaction {
+            Users.update({
+                Users.id eq id}) {
+                it[name] = userDTO.name
+                it[email] = userDTO.email
+            }
+        }
     }
+
 }
