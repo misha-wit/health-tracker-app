@@ -26,8 +26,13 @@ class JavalinConfig {
             delete("/api/users/:user-id", HealthTrackerAPI::deleteUser)
             patch("/api/users/:user-id", HealthTrackerAPI::updateUser)
             get("/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
+            get("/api/users/:user-id/foods", HealthTrackerAPI::getFoodsByUserId)
             get("/api/activities", HealthTrackerAPI::getAllActivities)
+            get("/api/activities/activity-id", HealthTrackerAPI::getActivitiesByActivityId)
             post("/api/activities", HealthTrackerAPI::addActivity)
+            get("/api/foods", HealthTrackerAPI::getAllFoods)
+            get("/api/foods/:food-id", HealthTrackerAPI::getFoodsByFoodId)
+            post("/api/foods", HealthTrackerAPI::addFood)
         }
     }
     private fun getHerokuAssignedPort(): Int {
