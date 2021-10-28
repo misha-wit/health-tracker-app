@@ -33,6 +33,8 @@ class JavalinConfig {
             get("/api/foods", HealthTrackerAPI::getAllFoods)
             get("/api/foods/:food-id", HealthTrackerAPI::getFoodsByFoodId)
             post("/api/foods", HealthTrackerAPI::addFood)
+            
+
         }
     }
     private fun getHerokuAssignedPort(): Int {
