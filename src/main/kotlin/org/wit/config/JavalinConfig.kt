@@ -19,20 +19,31 @@ class JavalinConfig {
 
     private fun registerRoutes(app: Javalin) {
         app.routes {
-            get("/api/users", HealthTrackerAPI::getAllUsers)
-            get("/api/users/:user-id", HealthTrackerAPI::getUserByUserId)
-            post("/api/users", HealthTrackerAPI::addUser)
-            get("/api/users/email/:email", HealthTrackerAPI::getUserByEmail)
+            //USERS - API CRUD
+            get(   "/api/users", HealthTrackerAPI::getAllUsers)
+            get(   "/api/users/:user-id", HealthTrackerAPI::getUserByUserId)
+            get(   "/api/users/email/:email", HealthTrackerAPI::getUserByEmail)
+            get(   "/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
+            get(   "/api/users/:user-id/foods", HealthTrackerAPI::getFoodsByUserId)
+            post(  "/api/users", HealthTrackerAPI::addUser)
             delete("/api/users/:user-id", HealthTrackerAPI::deleteUser)
-            patch("/api/users/:user-id", HealthTrackerAPI::updateUser)
-            get("/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
-            get("/api/users/:user-id/foods", HealthTrackerAPI::getFoodsByUserId)
-            get("/api/activities", HealthTrackerAPI::getAllActivities)
-            get("/api/activities/activity-id", HealthTrackerAPI::getActivitiesByActivityId)
-            post("/api/activities", HealthTrackerAPI::addActivity)
+            delete("/api/users/:user-id/activities", HealthTrackerAPI::deleteActivityByUserId)
+            delete("/api/users/:user-id/foods", HealthTrackerAPI::deleteFoodByUserId)
+            patch( "/api/users/:user-id", HealthTrackerAPI::updateUser)
+
+            //ACTIVITIES - API CRUD
+            get(   "/api/activities", HealthTrackerAPI::getAllActivities)
+            get(   "/api/activities/:activity-id", HealthTrackerAPI::getActivitiesByActivityId)
+            post(  "/api/activities", HealthTrackerAPI::addActivity)
+            delete("/api/activities/:activity-id", HealthTrackerAPI::deleteActivityByActivityId)
+            patch( "/api/activities/:activity-id", HealthTrackerAPI::updateActivity)
+
+            //FOODS - API CRUD
             get("/api/foods", HealthTrackerAPI::getAllFoods)
             get("/api/foods/:food-id", HealthTrackerAPI::getFoodsByFoodId)
             post("/api/foods", HealthTrackerAPI::addFood)
+            delete("/api/foods/:food-id", HealthTrackerAPI::deleteFoodByFoodId)
+            patch( "/api/foods/:food-id", HealthTrackerAPI::updateFood)
 
 
         }

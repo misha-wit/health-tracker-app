@@ -3,7 +3,7 @@ package org.wit.db
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
-// SRP - Responsibility is to manage one activity.
+// SRP - Responsibility is to manage one food item.
 //       Database wise, this is the table object.
 
 object Foods : Table("foods") {

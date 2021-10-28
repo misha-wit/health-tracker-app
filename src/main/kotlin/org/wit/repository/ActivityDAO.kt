@@ -50,4 +50,32 @@ class ActivityDAO {
         }
     }
 
+    //update a specific activity by activity id
+    fun updateByActivityId(activityId: Int, activityDTO: ActivityDTO): Int{
+        return transaction {
+            Activities.update ({
+                Activities.id eq activityId}) {
+                it[description] = activityDTO.description
+                it[duration] = activityDTO.duration
+                it[started] = activityDTO.started
+                it[calories] = activityDTO.calories
+                it[userId] = activityDTO.userId
+            }
+        }
+    }
+
+    //delete a specific activity by activity id
+    fun deleteByActivityId (activityId: Int): Int{
+        return transaction{
+            Activities.deleteWhere { Activities.id eq activityId }
+        }
+    }
+
+    //delete a specific activity by user id
+    fun deleteByUserId (userId: Int): Int{
+        return transaction{
+            Activities.deleteWhere { Activities.userId eq userId }
+        }
+    }
+
 }

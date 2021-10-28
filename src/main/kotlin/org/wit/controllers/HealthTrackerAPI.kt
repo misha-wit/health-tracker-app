@@ -83,6 +83,34 @@ object HealthTrackerAPI {
         }
     }
 
+
+    fun deleteActivityByActivityId(ctx: Context){
+        if (activityDAO.deleteByActivityId(ctx.pathParam("activity-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun deleteActivityByUserId(ctx: Context){
+        if (activityDAO.deleteByUserId(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun updateActivity(ctx: Context){
+        val mapper = jacksonObjectMapper()
+            .registerModule(JodaModule())
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+        val activity = mapper.readValue<ActivityDTO>(ctx.body())
+        if (activityDAO.updateByActivityId(
+                activityId = ctx.pathParam("activity-id").toInt(),
+                activityDTO=activity) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
     fun addActivity(ctx: Context) {
         val mapper = jacksonObjectMapper()
             .registerModule(JodaModule())
@@ -91,6 +119,8 @@ object HealthTrackerAPI {
         activityDAO.save(activity)
         ctx.json(activity)
     }
+
+
 
     //--------------------------------------------------------------
     // FoodDAO specifics
@@ -122,5 +152,32 @@ object HealthTrackerAPI {
         val food = mapper.readValue<FoodDTO>(ctx.body())
         foodDAO.save(food)
         ctx.json(food)
+    }
+
+    fun deleteFoodByFoodId(ctx: Context){
+        if (foodDAO.deleteByFoodId(ctx.pathParam("food-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun deleteFoodByUserId(ctx: Context){
+        if (foodDAO.deleteByUserId(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun updateFood(ctx: Context){
+        val mapper = jacksonObjectMapper()
+            .registerModule(JodaModule())
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+        val food = mapper.readValue<FoodDTO>(ctx.body())
+        if (foodDAO.updateByFoodId(
+                foodId = ctx.pathParam("food-id").toInt(),
+                foodDTO=food) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 }

@@ -1,8 +1,6 @@
 package org.wit.repository
 
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.wit.db.Foods
 import org.wit.domain.FoodDTO
@@ -49,6 +47,34 @@ class FoodDAO {
                 it[foodtime] = foodDTO.foodtime
                 it[userId] = foodDTO.userId
             }
+        }
+    }
+
+    //update a specific food item by food item id
+    fun updateByFoodId(foodId: Int, foodDTO: FoodDTO): Int{
+        return transaction {
+            Foods.update ({
+                Foods.id eq foodId}) {
+                it[mealname] = foodDTO.mealname
+                it[foodname] = foodDTO.foodname
+                it[foodtime] = foodDTO.foodtime
+                it[calories] = foodDTO.calories
+                it[userId] = foodDTO.userId
+            }
+        }
+    }
+
+    //delete a specific food item by food item id
+    fun deleteByFoodId (foodId: Int): Int{
+        return transaction{
+            Foods.deleteWhere { Foods.id eq foodId }
+        }
+    }
+
+    //delete a specific food item by userId
+    fun deleteByUserId (userId: Int): Int{
+        return transaction{
+            Foods.deleteWhere { Foods.userId eq userId }
         }
     }
 
