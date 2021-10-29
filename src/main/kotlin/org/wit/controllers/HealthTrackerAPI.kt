@@ -5,20 +5,23 @@ import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.javalin.http.Context
+import mu.KotlinLogging
 import org.wit.domain.ActivityDTO
 import org.wit.domain.FoodDTO
+import org.wit.domain.MeasurementDTO
 import org.wit.domain.UserDTO
 import org.wit.repository.ActivityDAO
 import org.wit.repository.FoodDAO
+import org.wit.repository.MeasurementDAO
 import org.wit.repository.UserDAO
-
 // SRP - Responsibility of this API is to manage IO between the DAOs and JSON context
 
 object HealthTrackerAPI {
-
+    private val logger = KotlinLogging.logger {}
     private val userDao = UserDAO()
     private val activityDAO = ActivityDAO()
     private val foodDAO = FoodDAO()
+    private val measurementDAO = MeasurementDAO()
 
     //--------------------------------------------------------------
     // UserDAO specifics
@@ -180,4 +183,64 @@ object HealthTrackerAPI {
         else
             ctx.status(404)
     }
+
+    //--------------------------------------------------------------
+    // Measurement Specifics
+    //-------------------------------------------------------------
+
+    fun getAllMeasurements(ctx: Context) {
+        ctx.json(measurementDAO.getAll())
+    }
+
+    fun getMeasurementsByUserId(ctx: Context) {
+        if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
+            val measurements = measurementDAO.findByUserId(ctx.pathParam("user-id").toInt())
+            if (measurements.size > 0)
+                ctx.json(measurements)
+        }
+    }
+
+    fun getMeasurementsByMeasurementId(ctx: Context) {
+        val measurement = measurementDAO.findByMeasurementId((ctx.pathParam("measurement-id").toInt()))
+        if (measurement != null){
+            ctx.json(measurement)
+        }
+    }
+
+    fun addMeasurement(ctx: Context) {
+        val mapper = jacksonObjectMapper()
+            .registerModule(JodaModule())
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+        val measurement = mapper.readValue<MeasurementDTO>(ctx.body())
+        measurementDAO.save(measurement)
+        ctx.json(measurement)
+    }
+
+    fun deleteMeasurementByMeasurementId(ctx: Context){
+        if (measurementDAO.deleteByMeasurementId(ctx.pathParam("measurement-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun deleteMeasurementByUserId(ctx: Context){
+        if (measurementDAO.deleteByUserId(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+
+    fun updateMeasurement(ctx: Context){
+        val mapper = jacksonObjectMapper()
+            .registerModule(JodaModule())
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+        val measurement = mapper.readValue<MeasurementDTO>(ctx.body())
+        if (measurementDAO.updateByMeasurementId(
+                measurementId = ctx.pathParam("measurement-id").toInt(),
+                measurementDTO=measurement) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
+    }
+    
 }

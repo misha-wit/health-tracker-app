@@ -25,10 +25,12 @@ class JavalinConfig {
             get(   "/api/users/email/:email", HealthTrackerAPI::getUserByEmail)
             get(   "/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
             get(   "/api/users/:user-id/foods", HealthTrackerAPI::getFoodsByUserId)
+            get(   "/api/users/:user-id/measurements", HealthTrackerAPI::getMeasurementsByUserId)
             post(  "/api/users", HealthTrackerAPI::addUser)
             delete("/api/users/:user-id", HealthTrackerAPI::deleteUser)
             delete("/api/users/:user-id/activities", HealthTrackerAPI::deleteActivityByUserId)
             delete("/api/users/:user-id/foods", HealthTrackerAPI::deleteFoodByUserId)
+            delete("/api/users/:user-id/measurements", HealthTrackerAPI::deleteMeasurementByUserId)
             patch( "/api/users/:user-id", HealthTrackerAPI::updateUser)
 
             //ACTIVITIES - API CRUD
@@ -44,6 +46,13 @@ class JavalinConfig {
             post("/api/foods", HealthTrackerAPI::addFood)
             delete("/api/foods/:food-id", HealthTrackerAPI::deleteFoodByFoodId)
             patch( "/api/foods/:food-id", HealthTrackerAPI::updateFood)
+
+            //MEASUREMENTS HISTORY- API CRUD
+            get("/api/measurements", HealthTrackerAPI::getAllMeasurements)
+            get("/api/measurements/:measurement-id", HealthTrackerAPI::getMeasurementsByMeasurementId)
+            post("/api/measurements", HealthTrackerAPI::addMeasurement)
+            delete("/api/measurements/:measurement-id", HealthTrackerAPI::deleteMeasurementByMeasurementId)
+            patch("/api/measurements/:measurement-id", HealthTrackerAPI::updateMeasurement)
 
 
         }
