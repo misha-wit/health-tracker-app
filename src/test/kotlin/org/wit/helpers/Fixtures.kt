@@ -4,12 +4,15 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.joda.time.DateTime
 import org.wit.db.Activities
 import org.wit.db.Foods
+import org.wit.db.Measurements
 import org.wit.db.Users
 import org.wit.domain.ActivityDTO
 import org.wit.domain.FoodDTO
+import org.wit.domain.MeasurementDTO
 import org.wit.domain.UserDTO
 import org.wit.repository.ActivityDAO
 import org.wit.repository.FoodDAO
+import org.wit.repository.MeasurementDAO
 import org.wit.repository.UserDAO
 
 
@@ -34,6 +37,12 @@ val foods = arrayListOf<FoodDTO>(
     FoodDTO(id = 1, mealname = "Breakfast", foodname = "Milk and Cornflakes", calories = 230, foodtime = DateTime.now(), userId = 1),
     FoodDTO(id = 2, mealname = "Lunch", foodname = "Rice and chicken", calories = 80, foodtime = DateTime.now(), userId = 1),
     FoodDTO(id = 3, mealname = "Breakfast", foodname = "Milk and Egg", calories = 120, foodtime = DateTime.now(), userId = 2)
+)
+
+val measurements = arrayListOf<MeasurementDTO>(
+    MeasurementDTO(id = 1, weight = 52, height = 150, addedon = DateTime.now(), userId = 1),
+    MeasurementDTO(id = 2, weight = 62, height = 160, addedon = DateTime.now(), userId = 1),
+    MeasurementDTO(id = 3, weight = 42, height = 140, addedon = DateTime.now(), userId = 2)
 )
 
 fun populateUserTable(): UserDAO {
@@ -61,4 +70,13 @@ fun populateFoodTable(): FoodDAO {
     foodDAO.save(foods.get(1))
     foodDAO.save(foods.get(2))
     return foodDAO
+}
+
+fun populateMeasurementTable(): MeasurementDAO {
+    SchemaUtils.create(Measurements)
+    val measurementDAO = MeasurementDAO()
+    measurementDAO.save(measurements.get(0))
+    measurementDAO.save(measurements.get(1))
+    measurementDAO.save(measurements.get(2))
+    return measurementDAO
 }

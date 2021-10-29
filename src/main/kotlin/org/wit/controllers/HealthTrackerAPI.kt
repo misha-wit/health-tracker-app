@@ -242,5 +242,5 @@ object HealthTrackerAPI {
         else
             ctx.status(404)
     }
-    
+
 }
