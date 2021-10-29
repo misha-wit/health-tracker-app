@@ -120,6 +120,7 @@ class ActivityDAOTest {
                 val activityDAO = populateActivityTable()
                 //Act & Assert
                 assertEquals(activity1, activityDAO.findByActivityId(1))
+                assertEquals(activity2, activityDAO.findByActivityId(2))
                 assertEquals(activity3, activityDAO.findByActivityId(3))
             }
         }
