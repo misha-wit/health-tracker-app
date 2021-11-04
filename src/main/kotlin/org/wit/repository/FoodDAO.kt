@@ -2,7 +2,9 @@ package org.wit.repository
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.wit.db.Activities
 import org.wit.db.Foods
+import org.wit.domain.ActivityDTO
 import org.wit.domain.FoodDTO
 import org.wit.util.mapToFoodDTO
 
@@ -38,8 +40,8 @@ class FoodDAO {
     }
 
     //Save a food item to the database
-    fun save(foodDTO: FoodDTO){
-        transaction {
+    fun save(foodDTO: FoodDTO) : Int?{
+        return transaction {
             Foods.insert {
                 it[mealname] = foodDTO.mealname
                 it[foodname] = foodDTO.foodname
@@ -47,7 +49,7 @@ class FoodDAO {
                 it[foodtime] = foodDTO.foodtime
                 it[userId] = foodDTO.userId
             }
-        }
+        } get Foods.id
     }
 
     //update a specific food item by food item id

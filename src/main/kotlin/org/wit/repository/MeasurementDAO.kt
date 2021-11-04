@@ -3,6 +3,7 @@ package org.wit.repository
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.wit.db.Foods
 import org.wit.db.Measurements
 import org.wit.domain.MeasurementDTO
 import org.wit.util.mapToMeasurementDTO
@@ -39,15 +40,15 @@ class MeasurementDAO {
     }
 
     //Save a Measurement item to the database
-    fun save(measurementDTO: MeasurementDTO){
-        transaction {
+    fun save(measurementDTO: MeasurementDTO) : Int?{
+        return transaction {
             Measurements.insert {
                 it[weight] = measurementDTO.weight
                 it[height] = measurementDTO.height
                 it[addedon] = measurementDTO.addedon
                 it[userId] = measurementDTO.userId
             }
-        }
+        } get Measurements.id
     }
 
     //update a specific measurement item by measurement item id

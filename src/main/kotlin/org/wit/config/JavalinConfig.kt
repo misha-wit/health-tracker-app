@@ -2,7 +2,9 @@ package org.wit.config
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import org.wit.controllers.FoodTrackerAPI
 import org.wit.controllers.HealthTrackerAPI
+import org.wit.controllers.MeasurementTrackerAPI
 
 class JavalinConfig {
 
@@ -24,13 +26,14 @@ class JavalinConfig {
             get(   "/api/users/:user-id", HealthTrackerAPI::getUserByUserId)
             get(   "/api/users/email/:email", HealthTrackerAPI::getUserByEmail)
             get(   "/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
-            get(   "/api/users/:user-id/foods", HealthTrackerAPI::getFoodsByUserId)
-            get(   "/api/users/:user-id/measurements", HealthTrackerAPI::getMeasurementsByUserId)
+            get(   "/api/users/:user-id/foods", FoodTrackerAPI::getFoodsByUserId)
+            get("/api/users/:user-id/measurements1", MeasurementTrackerAPI::getAllMeasurements)
+            get(   "/api/users/:user-id/measurements", MeasurementTrackerAPI::getMeasurementsByUserId)
             post(  "/api/users", HealthTrackerAPI::addUser)
             delete("/api/users/:user-id", HealthTrackerAPI::deleteUser)
             delete("/api/users/:user-id/activities", HealthTrackerAPI::deleteActivityByUserId)
-            delete("/api/users/:user-id/foods", HealthTrackerAPI::deleteFoodByUserId)
-            delete("/api/users/:user-id/measurements", HealthTrackerAPI::deleteMeasurementByUserId)
+            delete("/api/users/:user-id/foods", FoodTrackerAPI::deleteFoodByUserId)
+            delete("/api/users/:user-id/measurements", MeasurementTrackerAPI::deleteMeasurementByUserId)
             patch( "/api/users/:user-id", HealthTrackerAPI::updateUser)
 
             //ACTIVITIES - API CRUD
@@ -41,22 +44,25 @@ class JavalinConfig {
             patch( "/api/activities/:activity-id", HealthTrackerAPI::updateActivity)
 
             //FOODS - API CRUD
-            get("/api/foods", HealthTrackerAPI::getAllFoods)
-            get("/api/foods/:food-id", HealthTrackerAPI::getFoodsByFoodId)
-            post("/api/foods", HealthTrackerAPI::addFood)
-            delete("/api/foods/:food-id", HealthTrackerAPI::deleteFoodByFoodId)
-            patch( "/api/foods/:food-id", HealthTrackerAPI::updateFood)
+            get("/api/foods", FoodTrackerAPI::getAllFoods)
+            get("/api/foods/:food-id", FoodTrackerAPI::getFoodsByFoodId)
+            post("/api/foods", FoodTrackerAPI::addFood)
+            delete("/api/foods/:food-id", FoodTrackerAPI::deleteFoodByFoodId)
+            patch( "/api/foods/:food-id", FoodTrackerAPI::updateFood)
 
             //MEASUREMENTS HISTORY- API CRUD
-            get("/api/measurements", HealthTrackerAPI::getAllMeasurements)
-            get("/api/measurements/:measurement-id", HealthTrackerAPI::getMeasurementsByMeasurementId)
-            post("/api/measurements", HealthTrackerAPI::addMeasurement)
-            delete("/api/measurements/:measurement-id", HealthTrackerAPI::deleteMeasurementByMeasurementId)
-            patch("/api/measurements/:measurement-id", HealthTrackerAPI::updateMeasurement)
+            get("/api/measurements", MeasurementTrackerAPI::getAllMeasurements)
+            get("/api/measurements/:measurement-id", MeasurementTrackerAPI::getMeasurementsByMeasurementId)
+            post("/api/measurements", MeasurementTrackerAPI::addMeasurement)
+            delete("/api/measurements/:measurement-id", MeasurementTrackerAPI::deleteMeasurementByMeasurementId)
+            patch("/api/measurements/:measurement-id", MeasurementTrackerAPI::updateMeasurement)
 
 
         }
     }
+
+
+
     private fun getHerokuAssignedPort(): Int {
         val herokuPort = System.getenv("PORT")
         return if (herokuPort != null) {
