@@ -14,6 +14,8 @@ import org.wit.repository.ActivityDAO
 import org.wit.repository.FoodDAO
 import org.wit.repository.MeasurementDAO
 import org.wit.repository.UserDAO
+import org.wit.util.jsonToObject
+
 // SRP - Responsibility of this API is to manage IO between the DAOs and JSON context
 
 object HealthTrackerAPI {
@@ -27,13 +29,24 @@ object HealthTrackerAPI {
     // UserDAO specifics
     //-------------------------------------------------------------
     fun getAllUsers(ctx: Context) {
-        ctx.json(userDao.getAll())
+        val users = userDao.getAll()
+        if (users.size != 0) {
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(users)
     }
 
     fun getUserByUserId(ctx: Context) {
         val user = userDao.findById(ctx.pathParam("user-id").toInt())
         if (user != null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 
@@ -41,26 +54,36 @@ object HealthTrackerAPI {
         val user = userDao.findByEmail(ctx.pathParam("email"))
         if (user != null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 
     fun addUser(ctx: Context) {
-        val mapper = jacksonObjectMapper()
-        val user = mapper.readValue<UserDTO>(ctx.body())
-        userDao.save(user)
-        ctx.json(user)
+        val user : UserDTO = jsonToObject(ctx.body())
+        val userId = userDao.save(user)
+        if (userId != null) {
+            user.id = userId
+            ctx.json(user)
+            ctx.status(201)
+        }
     }
 
     fun deleteUser(ctx: Context){
-        userDao.delete(ctx.pathParam("user-id").toInt())
+        if (userDao.delete(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 
     fun updateUser(ctx: Context){
-        val mapper = jacksonObjectMapper()
-        val user = mapper.readValue<UserDTO>(ctx.body())
-        userDao.update(
-            id = ctx.pathParam("user-id").toInt(),
-            userDTO=user)
+        val user : UserDTO = jsonToObject(ctx.body())
+        if ((userDao.update(id = ctx.pathParam("user-id").toInt(), userDTO=user)) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 
     //--------------------------------------------------------------
@@ -74,8 +97,16 @@ object HealthTrackerAPI {
     fun getActivitiesByUserId(ctx: Context) {
         if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
             val activities = activityDAO.findByUserId(ctx.pathParam("user-id").toInt())
-            if (activities.isNotEmpty())
+            if (activities.size > 0) {
                 ctx.json(activities)
+                ctx.status(200)
+            }
+            else{
+                ctx.status(404)
+            }
+        }
+        else{
+            ctx.status(404)
         }
     }
 
@@ -83,6 +114,10 @@ object HealthTrackerAPI {
         val activity = activityDAO.findByActivityId((ctx.pathParam("activity-id").toInt()))
         if (activity != null){
             ctx.json(activity)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 
@@ -102,10 +137,7 @@ object HealthTrackerAPI {
     }
 
     fun updateActivity(ctx: Context){
-        val mapper = jacksonObjectMapper()
-            .registerModule(JodaModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        val activity = mapper.readValue<ActivityDTO>(ctx.body())
+        val activity : ActivityDTO = jsonToObject(ctx.body())
         if (activityDAO.updateByActivityId(
                 activityId = ctx.pathParam("activity-id").toInt(),
                 activityDTO=activity) != 0)
@@ -115,15 +147,20 @@ object HealthTrackerAPI {
     }
 
     fun addActivity(ctx: Context) {
-        val mapper = jacksonObjectMapper()
-            .registerModule(JodaModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        val activity = mapper.readValue<ActivityDTO>(ctx.body())
-        activityDAO.save(activity)
-        ctx.json(activity)
+        val activityDTO : ActivityDTO = jsonToObject(ctx.body())
+        val userId = userDao.findById(activityDTO.userId)
+        if (userId != null) {
+            val activityId = activityDAO.save(activityDTO)
+            if (activityId != null) {
+                activityDTO.id = activityId
+                ctx.json(activityDTO)
+                ctx.status(201)
+            }
+        }
+        else{
+            ctx.status(404)
+        }
     }
-
-
 
     //--------------------------------------------------------------
     // FoodDAO specifics
