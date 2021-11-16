@@ -1,0 +1,113 @@
+# Created at 2021-11-16T16:16:27.371
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:398)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:831)
+
+
+# Created at 2021-11-16T16:16:28.226
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get all foods by user id when no user exists returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:28.235
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get all foods by user id when no foods exist returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:32.147
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get all foods by user id when no foods exist returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:32.147
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get food by food id when food exists returns 200 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:37.385
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get food by food id when food exists returns 200 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:37.385
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get food by food id when no food exists returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:38.356
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$ReadFoods,get food by food id when no food exists returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:38.356
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$UpdateFoods,updating an food by food id when it exists\002C returns 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:44.267
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$UpdateFoods,updating an food by food id when it exists\002C returns 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:44.267
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$UpdateFoods,updating an food by food id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:46.267
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$UpdateFoods,updating an food by food id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:46.267
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting an food by id when it exists\002C returns a 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:51.179
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting an food by id when it exists\002C returns a 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:51.179
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting an food by food id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:52.178
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting an food by food id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:52.178
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting foods by user id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:53.172
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting foods by user id when it doesn't exist\002C returns a 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:16:53.172
+Unexpected IOException: 5,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting all foods by userid when it exists\002C returns a 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:04.074
+Unexpected IOException: 6,1,org.wit.controllers.FoodTrackerAPITest$DeleteFoods,deleting all foods by userid when it exists\002C returns a 204 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:04.074
+Unexpected IOException: 2,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,org.wit.controllers.FoodTrackerAPITest,null,null,null
+
+
+# Created at 2021-11-16T16:17:04.090
+Unexpected IOException: 1,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,org.wit.controllers.HealthTrackerAPITest,null,null,null
+
+
+# Created at 2021-11-16T16:17:04.090
+Unexpected IOException: 5,1,org.wit.controllers.HealthTrackerAPITest$ReadUsers,get all users from the database returns 200 or 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:05.373
+Unexpected IOException: 6,1,org.wit.controllers.HealthTrackerAPITest$ReadUsers,get all users from the database returns 200 or 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:05.389
+Unexpected IOException: 5,1,org.wit.controllers.HealthTrackerAPITest$ReadUsers,get user by id when user does not exist returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:06.355
+Unexpected IOException: 6,1,org.wit.controllers.HealthTrackerAPITest$ReadUsers,get user by id when user does not exist returns 404 response,null,null,null
+
+
+# Created at 2021-11-16T16:17:06.355
+Unexpected IOException: 5,1,org.wit.controllers.HealthTrackerAPITest$ReadUsers,getting a user by email when email exists\002C returns a 200 response,null,null,null
+
+
