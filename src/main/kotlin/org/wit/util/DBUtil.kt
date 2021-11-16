@@ -1,14 +1,12 @@
 package org.wit.util
 
+import org.jetbrains.exposed.sql.Alias
 import org.jetbrains.exposed.sql.ResultRow
 import org.wit.db.Activities
 import org.wit.db.Foods
 import org.wit.db.Measurements
 import org.wit.db.Users
-import org.wit.domain.ActivityDTO
-import org.wit.domain.FoodDTO
-import org.wit.domain.MeasurementDTO
-import org.wit.domain.UserDTO
+import org.wit.domain.*
 
 fun mapToUserDTO(it: ResultRow) = UserDTO(
     id = it[Users.id],
@@ -40,4 +38,10 @@ fun mapToMeasurementDTO(it: ResultRow) = MeasurementDTO(
     height = it[Measurements.height],
     addedon = it[Measurements.addedon],
     userId = it[Measurements.userId]
+)
+
+fun mapToAnalysisDTO(it: ResultRow, measurements : Alias<Measurements>, foods : Alias<Foods> ) = AnalysisDTO(
+    calories = it[foods[Foods.calories]],
+    weight = it[measurements[Measurements.weight]],
+    userId = it[Users.id]
 )

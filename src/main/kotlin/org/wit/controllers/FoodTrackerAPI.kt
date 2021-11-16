@@ -1,11 +1,7 @@
 package org.wit.controllers
 
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.joda.JodaModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
+
 import io.javalin.http.Context
-import org.wit.domain.ActivityDTO
 import org.wit.domain.FoodDTO
 import org.wit.repository.FoodDAO
 import org.wit.repository.UserDAO
