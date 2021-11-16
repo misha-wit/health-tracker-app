@@ -4,6 +4,7 @@ import org.junit.Assert
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.wit.config.DbConfig
 import org.wit.domain.MeasurementDTO
 import org.wit.domain.UserDTO
 import org.wit.helpers.*
@@ -13,7 +14,7 @@ import org.wit.util.jsonToObjectWithDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MeasurementTrackerAPITest {
-
+    val db = DbConfig().getDbConnection()
     @Nested
     inner class CreateMeasurements {
         //   post(  "/api/measurements", HealthTrackerAPI::addMeasurement)

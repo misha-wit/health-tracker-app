@@ -19,7 +19,7 @@ import org.wit.repository.FoodDAO
 import org.wit.repository.MeasurementDAO
 import org.wit.repository.UserDAO
 
-val db = DbConfig().getDbConnection()
+
 val app = ServerContainer.instance
 val origin = "http://localhost:" + app.port()
 
@@ -45,7 +45,7 @@ val updatedHeight = 160
 val updatedAddedOn = DateTime.parse("2020-06-11T05:59:27.258Z")
 
 val users = arrayListOf<UserDTO>(
-    UserDTO(name = "Alice Wonderland", email = "alice@wonderland.com", id = 1),
+    UserDTO(name = "Alice1 Wonderland", email = "alice@wonderland.com", id = 1),
     UserDTO(name = "Bob Cat", email = "bob@cat.ie", id = 2),
     UserDTO(name = "Mary Contrary", email = "mary@contrary.com", id = 3),
     UserDTO(name = "Carol Singer", email = "carol@singer.com", id = 4)

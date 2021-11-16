@@ -21,7 +21,7 @@ import org.wit.util.jsonToObjectWithDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class HealthTrackerAPITest {
-
+    val db = DbConfig().getDbConnection()
     @Nested
     inner class ReadUsers {
         @Test

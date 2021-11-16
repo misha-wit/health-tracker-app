@@ -148,6 +148,8 @@
                         <include>Test*</include>
                         <include>*Test</include>
                     </includes>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
                 </configuration>
             </plugin>
 

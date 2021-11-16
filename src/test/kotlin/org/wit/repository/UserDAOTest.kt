@@ -70,7 +70,7 @@ class UserDAOTest {
                 val userDAO = populateUserTable()
 
                 //Act & Assert
-                assertEquals(null, userDAO.findById(4))
+                assertEquals(null, userDAO.findById(-4))
             }
         }
 
