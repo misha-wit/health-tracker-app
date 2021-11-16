@@ -63,6 +63,7 @@ object HealthTrackerAPI {
             ctx.json(user)
             ctx.status(201)
         }
+
     }
 
     fun deleteUser(ctx: Context){

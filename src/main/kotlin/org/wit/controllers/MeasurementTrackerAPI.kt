@@ -59,12 +59,6 @@ object MeasurementTrackerAPI {
     }
 
     fun addMeasurement(ctx: Context) {
-        /*val mapper = jacksonObjectMapper()
-            .registerModule(JodaModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        val measurement = mapper.readValue<MeasurementDTO>(ctx.body())
-        measurementDAO.save(measurement)
-        ctx.json(measurement)*/
         val measurementDTO : MeasurementDTO = jsonToObject(ctx.body())
         val userId = userDao.findById(measurementDTO.userId)
         if (userId != null) {

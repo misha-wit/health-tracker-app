@@ -2,6 +2,8 @@ package org.wit.config
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import org.wit.controllers.AnalysisAPI
+//import org.wit.controllers.AnalysisAPI
 import org.wit.controllers.FoodTrackerAPI
 import org.wit.controllers.HealthTrackerAPI
 import org.wit.controllers.MeasurementTrackerAPI
@@ -27,7 +29,6 @@ class JavalinConfig {
             get(   "/api/users/email/:email", HealthTrackerAPI::getUserByEmail)
             get(   "/api/users/:user-id/activities", HealthTrackerAPI::getActivitiesByUserId)
             get(   "/api/users/:user-id/foods", FoodTrackerAPI::getFoodsByUserId)
-            get("/api/users/:user-id/measurements1", MeasurementTrackerAPI::getAllMeasurements)
             get(   "/api/users/:user-id/measurements", MeasurementTrackerAPI::getMeasurementsByUserId)
             post(  "/api/users", HealthTrackerAPI::addUser)
             delete("/api/users/:user-id", HealthTrackerAPI::deleteUser)
@@ -57,6 +58,8 @@ class JavalinConfig {
             delete("/api/measurements/:measurement-id", MeasurementTrackerAPI::deleteMeasurementByMeasurementId)
             patch("/api/measurements/:measurement-id", MeasurementTrackerAPI::updateMeasurement)
 
+            //ANALYSIS API
+            get("/api/analysis/measurement/:user-id", AnalysisAPI::getAnalysisDetails)
 
         }
     }

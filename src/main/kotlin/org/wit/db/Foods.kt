@@ -10,7 +10,7 @@ object Foods : Table("foods") {
     val id = integer("id").autoIncrement().primaryKey()
     val mealname = varchar("mealname", 100)
     val foodname = varchar("foodname", 100)
-    val calories = integer("calories")
+    var calories = integer("calories")
     val foodtime = datetime("foodtime")
     val userId = integer("user_id").references(Users.id, onDelete = ReferenceOption.CASCADE)
 }
