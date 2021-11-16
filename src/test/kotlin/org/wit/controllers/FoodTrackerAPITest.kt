@@ -4,6 +4,7 @@ import org.junit.Assert
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.wit.config.DbConfig
 import org.wit.domain.FoodDTO
 import org.wit.domain.UserDTO
 import org.wit.helpers.*
@@ -13,7 +14,7 @@ import org.wit.util.jsonToObjectWithDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FoodTrackerAPITest {
-
+    val db = DbConfig().getDbConnection()
     @Nested
     inner class CreateFoods {
         //   post(  "/api/foods", HealthTrackerAPI::addFood)
@@ -259,4 +260,5 @@ class FoodTrackerAPITest {
             Assert.assertEquals(404, retrieveFoodByFoodId(addedFood3.id).status)
         }
     }
+
 }
