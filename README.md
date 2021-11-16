@@ -9,7 +9,7 @@ Download the Zip File
 * Linux :   
 git clone https://github.com/misha-wit/health-tracker-app/
 ### Step 2:
-Test if the Unit tests and Integration tests are passing.
+Test if the Unit tests and Integration tests are passing from Test folder.
 
 ### Step 3:
-Deploy the code after successfull Validation
+Deploy the code after successfull Validation to Heroku. 
