@@ -4,9 +4,9 @@ In this project a health tracker Web Application is created using Kotlin Languag
 ## Execute the Repository
 ### Step 1:
 Create a local repository for the project
-* Windows
+* Windows :   
 Download the Zip File
-* Linux
+* Linux :   
 git clone https://github.com/misha-wit/health-tracker-app/
 ### Step 2:
 Test if the Unit tests and Integration tests are passing.
