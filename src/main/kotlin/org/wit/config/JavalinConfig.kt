@@ -2,6 +2,7 @@ package org.wit.config
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.plugin.rendering.vue.VueComponent
 import org.wit.controllers.AnalysisAPI
 //import org.wit.controllers.AnalysisAPI
 import org.wit.controllers.FoodTrackerAPI
@@ -12,9 +13,8 @@ class JavalinConfig {
 
     fun startJavalinService(): Javalin {
 
-        val app = Javalin.create().apply {
-            exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-            error(404) { ctx -> ctx.json("404 - Not Found") }
+        val app = Javalin.create { config ->
+            config.enableWebjars()
         }.start(getHerokuAssignedPort())
 
         registerRoutes(app)
@@ -61,6 +61,13 @@ class JavalinConfig {
             //ANALYSIS API
             get("/api/analysis/measurement/:user-id", AnalysisAPI::getAnalysisDetails)
 
+            // The @routeComponent that we added in layout.html earlier will be replaced
+            // by the String inside of VueComponent. This means a call to / will load
+            // the layout and display our <home-page> component.
+            get("/", VueComponent("<home-page></home-page>"))
+            get("/users", VueComponent("<user-overview></user-overview>"))
+            get("/users/:user-id", VueComponent("<user-profile></user-profile>"))
+            get("/users/:user-id/activities", VueComponent("<user-activity-overview></user-activity-overview>"))
         }
     }
 
