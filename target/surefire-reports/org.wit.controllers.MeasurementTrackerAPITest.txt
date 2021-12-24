@@ -1,4 +1,60 @@
 -------------------------------------------------------------------------------
 Test set: org.wit.controllers.MeasurementTrackerAPITest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 58.898 s - in org.wit.controllers.MeasurementTrackerAPITest
+Tests run: 14, Failures: 5, Errors: 6, Skipped: 0, Time elapsed: 20.549 s <<< FAILURE! - in org.wit.controllers.MeasurementTrackerAPITest
+get measurement by measurement id when measurement exists returns 200 response  Time elapsed: 1.048 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get measurement by measurement id when measurement exists returns 200 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when measurement exists returns 200 response(MeasurementTrackerAPITest.kt:288)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get measurement by measurement id when measurement exists returns 200 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when measurement exists returns 200 response(MeasurementTrackerAPITest.kt:288)
+
+get all measurements by user id when user and measurements exists returns 200 response  Time elapsed: 1.006 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when user and measurements exists returns 200 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when user and measurements exists returns 200 response(MeasurementTrackerAPITest.kt:271)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when user and measurements exists returns 200 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when user and measurements exists returns 200 response(MeasurementTrackerAPITest.kt:271)
+
+get measurement by measurement id when no measurement exists returns 404 response  Time elapsed: 0.087 s  <<< FAILURE!
+java.lang.AssertionError: expected:<404> but was:<500>
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when no measurement exists returns 404 response(MeasurementTrackerAPITest.kt:123)
+
+get all measurements by user id when no measurements exist returns 404 response  Time elapsed: 0.951 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when no measurements exist returns 404 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no measurements exist returns 404 response(MeasurementTrackerAPITest.kt:280)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when no measurements exist returns 404 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no measurements exist returns 404 response(MeasurementTrackerAPITest.kt:280)
+
+get all measurements from the database returns 200 or 404 response  Time elapsed: 0.037 s  <<< FAILURE!
+java.lang.AssertionError: expected:<404> but was:<500>
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements from the database returns 200 or 404 response(MeasurementTrackerAPITest.kt:66)
+
+updating an measurement by measurement id when it exists, returns 204 response  Time elapsed: 0.98 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$UpdateMeasurements$updating an measurement by measurement id when it exists, returns 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it exists, returns 204 response(MeasurementTrackerAPITest.kt:270)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements$updating an measurement by measurement id when it exists, returns 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it exists, returns 204 response(MeasurementTrackerAPITest.kt:270)
+
+updating an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 1.018 s  <<< FAILURE!
+java.lang.AssertionError: expected:<404> but was:<500>
+	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:160)
+
+deleting an measurement by id when it exists, returns a 204 response  Time elapsed: 0.989 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$DeleteMeasurements$deleting an measurement by id when it exists, returns a 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by id when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:270)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements$deleting an measurement by id when it exists, returns a 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by id when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:270)
+
+deleting all measurements by userid when it exists, returns a 204 response  Time elapsed: 0.999 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$DeleteMeasurements$deleting all measurements by userid when it exists, returns a 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting all measurements by userid when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:279)
+Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements$deleting all measurements by userid when it exists, returns a 204 response$$inlined$jsonToObject$1
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting all measurements by userid when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:279)
+
+deleting an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 0.051 s  <<< FAILURE!
+java.lang.AssertionError: expected:<404> but was:<500>
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by measurement id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:205)
+
+deleting measurements by user id when it doesn't exist, returns a 404 response  Time elapsed: 0.018 s  <<< FAILURE!
+java.lang.AssertionError: expected:<404> but was:<500>
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting measurements by user id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:211)
+
