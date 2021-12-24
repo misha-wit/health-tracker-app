@@ -1,8 +1,7 @@
 package org.wit.controllers
 
+import org.jetbrains.exposed.sql.Database
 import org.junit.jupiter.api.TestInstance
-import org.wit.config.DbConfig
-import org.wit.helpers.ServerContainer
 import kong.unirest.Unirest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
@@ -10,18 +9,18 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.wit.domain.UserDTO
 import org.wit.util.jsonToObject
-import kong.unirest.HttpResponse
-import kong.unirest.JsonNode
 import org.wit.helpers.*
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import org.joda.time.DateTime
 import org.wit.domain.ActivityDTO
 import org.wit.util.jsonToArrayWithDate
 import org.wit.util.jsonToObjectWithDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class HealthTrackerAPITest {
-    val db = DbConfig().getDbConnection()
+    val db = Database.connect(
+        "jdbc:postgresql://ec2-54-74-102-48.eu-west-1.compute.amazonaws.com:5432/dbnbsti78ce6m4?sslmode=require",
+        driver = "org.postgresql.Driver",
+        user = "wynkhjxpwnatok",
+        password = "cb388b6a8b43f9a860898d3eaaf47ac93d77b1bafaa9e005663d1511536fbf88")
     @Nested
     inner class ReadUsers {
         @Test
