@@ -1,5 +1,6 @@
 package org.wit.controllers
 
+import org.jetbrains.exposed.sql.Database
 import org.junit.Assert
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -14,7 +15,11 @@ import org.wit.util.jsonToObjectWithDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FoodTrackerAPITest {
-    val db = DbConfig().getDbConnection()
+    val db = Database.connect(
+        "jdbc:postgresql://ec2-54-74-102-48.eu-west-1.compute.amazonaws.com:5432/dbnbsti78ce6m4?sslmode=require",
+        driver = "org.postgresql.Driver",
+        user = "wynkhjxpwnatok",
+        password = "cb388b6a8b43f9a860898d3eaaf47ac93d77b1bafaa9e005663d1511536fbf88")
     @Nested
     inner class CreateFoods {
         //   post(  "/api/foods", HealthTrackerAPI::addFood)
