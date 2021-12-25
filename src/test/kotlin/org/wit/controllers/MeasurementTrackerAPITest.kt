@@ -5,7 +5,6 @@ import org.junit.Assert
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.wit.config.DbConfig
 import org.wit.domain.MeasurementDTO
 import org.wit.domain.UserDTO
 import org.wit.helpers.*
@@ -16,10 +15,10 @@ import org.wit.util.jsonToObjectWithDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MeasurementTrackerAPITest {
     val db = Database.connect(
-        "jdbc:postgresql://ec2-54-74-102-48.eu-west-1.compute.amazonaws.com:5432/dbnbsti78ce6m4?sslmode=require",
+        "jdbc:postgresql://ec2-54-172-169-87.compute-1.amazonaws.com:5432/d75u9glj5k4v13?sslmode=require",
         driver = "org.postgresql.Driver",
-        user = "wynkhjxpwnatok",
-        password = "cb388b6a8b43f9a860898d3eaaf47ac93d77b1bafaa9e005663d1511536fbf88")
+        user = "ssbrrxzccwlwpd",
+        password = "39966b431ff8422ea4aff334461b9972bc36039cb241f169029ab14f792ed5f6")
     @Nested
     inner class CreateMeasurements {
         //   post(  "/api/measurements", HealthTrackerAPI::addMeasurement)
