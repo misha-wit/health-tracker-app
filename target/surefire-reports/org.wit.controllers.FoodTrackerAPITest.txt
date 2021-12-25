@@ -1,4 +1,66 @@
 -------------------------------------------------------------------------------
 Test set: org.wit.controllers.FoodTrackerAPITest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 58.544 s - in org.wit.controllers.FoodTrackerAPITest
+Tests run: 14, Failures: 0, Errors: 14, Skipped: 0, Time elapsed: 2.001 s <<< FAILURE! - in org.wit.controllers.FoodTrackerAPITest
+add a food when no user exists for it, returns a 404 response  Time elapsed: 0.428 s  <<< ERROR!
+java.lang.ExceptionInInitializerError
+	at org.wit.controllers.FoodTrackerAPITest$CreateFoods.add a food when no user exists for it, returns a 404 response(FoodTrackerAPITest.kt:43)
+Caused by: java.lang.RuntimeException: Port already in use. Make sure no other process is using port 7000 and try again.
+	at org.wit.controllers.FoodTrackerAPITest$CreateFoods.add a food when no user exists for it, returns a 404 response(FoodTrackerAPITest.kt:43)
+Caused by: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:7000
+	at org.wit.controllers.FoodTrackerAPITest$CreateFoods.add a food when no user exists for it, returns a 404 response(FoodTrackerAPITest.kt:43)
+Caused by: java.net.BindException: Address already in use: bind
+	at org.wit.controllers.FoodTrackerAPITest$CreateFoods.add a food when no user exists for it, returns a 404 response(FoodTrackerAPITest.kt:43)
+
+add a food when a user exists for it, returns a 201 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$CreateFoods.add a food when a user exists for it, returns a 201 response(FoodTrackerAPITest.kt:26)
+
+get all foods from the database returns 200 or 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get all foods from the database returns 200 or 404 response(FoodTrackerAPITest.kt:60)
+
+get all foods by user id when user and foods exists returns 200 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get all foods by user id when user and foods exists returns 200 response(FoodTrackerAPITest.kt:73)
+
+get all foods by user id when no user exists returns 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get all foods by user id when no user exists returns 404 response(FoodTrackerAPITest.kt:113)
+
+get all foods by user id when no foods exist returns 404 response  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get all foods by user id when no foods exist returns 404 response(FoodTrackerAPITest.kt:97)
+
+get food by food id when food exists returns 200 response  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get food by food id when food exists returns 200 response(FoodTrackerAPITest.kt:130)
+
+get food by food id when no food exists returns 404 response  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$ReadFoods.get food by food id when no food exists returns 404 response(FoodTrackerAPITest.kt:122)
+
+updating an food by food id when it exists, returns 204 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$UpdateFoods.updating an food by food id when it exists, returns 204 response(FoodTrackerAPITest.kt:172)
+
+updating an food by food id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$UpdateFoods.updating an food by food id when it doesn't exist, returns a 404 response(FoodTrackerAPITest.kt:157)
+
+deleting an food by id when it exists, returns a 204 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$DeleteFoods.deleting an food by id when it exists, returns a 204 response(FoodTrackerAPITest.kt:219)
+
+deleting an food by food id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$DeleteFoods.deleting an food by food id when it doesn't exist, returns a 404 response(FoodTrackerAPITest.kt:206)
+
+deleting foods by user id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$DeleteFoods.deleting foods by user id when it doesn't exist, returns a 404 response(FoodTrackerAPITest.kt:212)
+
+deleting all foods by userid when it exists, returns a 204 response  Time elapsed: 0.016 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.FoodTrackerAPITest$DeleteFoods.deleting all foods by userid when it exists, returns a 204 response(FoodTrackerAPITest.kt:237)
+

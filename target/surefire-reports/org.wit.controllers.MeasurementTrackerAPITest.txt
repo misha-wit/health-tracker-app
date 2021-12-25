@@ -1,60 +1,66 @@
 -------------------------------------------------------------------------------
 Test set: org.wit.controllers.MeasurementTrackerAPITest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 5, Errors: 6, Skipped: 0, Time elapsed: 20.549 s <<< FAILURE! - in org.wit.controllers.MeasurementTrackerAPITest
-get measurement by measurement id when measurement exists returns 200 response  Time elapsed: 1.048 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get measurement by measurement id when measurement exists returns 200 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when measurement exists returns 200 response(MeasurementTrackerAPITest.kt:288)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get measurement by measurement id when measurement exists returns 200 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when measurement exists returns 200 response(MeasurementTrackerAPITest.kt:288)
+Tests run: 14, Failures: 0, Errors: 14, Skipped: 0, Time elapsed: 2.051 s <<< FAILURE! - in org.wit.controllers.MeasurementTrackerAPITest
+add a measurement when a user exists for it, returns a 201 response  Time elapsed: 0.429 s  <<< ERROR!
+java.lang.ExceptionInInitializerError
+	at org.wit.controllers.MeasurementTrackerAPITest$CreateMeasurements.add a measurement when a user exists for it, returns a 201 response(MeasurementTrackerAPITest.kt:26)
+Caused by: java.lang.RuntimeException: Port already in use. Make sure no other process is using port 7000 and try again.
+	at org.wit.controllers.MeasurementTrackerAPITest$CreateMeasurements.add a measurement when a user exists for it, returns a 201 response(MeasurementTrackerAPITest.kt:26)
+Caused by: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:7000
+	at org.wit.controllers.MeasurementTrackerAPITest$CreateMeasurements.add a measurement when a user exists for it, returns a 201 response(MeasurementTrackerAPITest.kt:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at org.wit.controllers.MeasurementTrackerAPITest$CreateMeasurements.add a measurement when a user exists for it, returns a 201 response(MeasurementTrackerAPITest.kt:26)
 
-get all measurements by user id when user and measurements exists returns 200 response  Time elapsed: 1.006 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when user and measurements exists returns 200 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when user and measurements exists returns 200 response(MeasurementTrackerAPITest.kt:271)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when user and measurements exists returns 200 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when user and measurements exists returns 200 response(MeasurementTrackerAPITest.kt:271)
+add a measurement when no user exists for it, returns a 404 response  Time elapsed: 0.016 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$CreateMeasurements.add a measurement when no user exists for it, returns a 404 response(MeasurementTrackerAPITest.kt:43)
 
-get measurement by measurement id when no measurement exists returns 404 response  Time elapsed: 0.087 s  <<< FAILURE!
-java.lang.AssertionError: expected:<404> but was:<500>
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when no measurement exists returns 404 response(MeasurementTrackerAPITest.kt:123)
+get measurement by measurement id when measurement exists returns 200 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when measurement exists returns 200 response(MeasurementTrackerAPITest.kt:130)
 
-get all measurements by user id when no measurements exist returns 404 response  Time elapsed: 0.951 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when no measurements exist returns 404 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no measurements exist returns 404 response(MeasurementTrackerAPITest.kt:280)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements$get all measurements by user id when no measurements exist returns 404 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no measurements exist returns 404 response(MeasurementTrackerAPITest.kt:280)
+get all measurements by user id when user and measurements exists returns 200 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when user and measurements exists returns 200 response(MeasurementTrackerAPITest.kt:73)
 
-get all measurements from the database returns 200 or 404 response  Time elapsed: 0.037 s  <<< FAILURE!
-java.lang.AssertionError: expected:<404> but was:<500>
-	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements from the database returns 200 or 404 response(MeasurementTrackerAPITest.kt:66)
+get measurement by measurement id when no measurement exists returns 404 response  Time elapsed: 0.016 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get measurement by measurement id when no measurement exists returns 404 response(MeasurementTrackerAPITest.kt:122)
 
-updating an measurement by measurement id when it exists, returns 204 response  Time elapsed: 0.98 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$UpdateMeasurements$updating an measurement by measurement id when it exists, returns 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it exists, returns 204 response(MeasurementTrackerAPITest.kt:270)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements$updating an measurement by measurement id when it exists, returns 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it exists, returns 204 response(MeasurementTrackerAPITest.kt:270)
+get all measurements by user id when no measurements exist returns 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no measurements exist returns 404 response(MeasurementTrackerAPITest.kt:97)
 
-updating an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 1.018 s  <<< FAILURE!
-java.lang.AssertionError: expected:<404> but was:<500>
-	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:160)
+get all measurements by user id when no user exists returns 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements by user id when no user exists returns 404 response(MeasurementTrackerAPITest.kt:113)
 
-deleting an measurement by id when it exists, returns a 204 response  Time elapsed: 0.989 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$DeleteMeasurements$deleting an measurement by id when it exists, returns a 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by id when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:270)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements$deleting an measurement by id when it exists, returns a 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by id when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:270)
+get all measurements from the database returns 200 or 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$ReadMeasurements.get all measurements from the database returns 200 or 404 response(MeasurementTrackerAPITest.kt:60)
 
-deleting all measurements by userid when it exists, returns a 204 response  Time elapsed: 0.999 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/wit/controllers/MeasurementTrackerAPITest$DeleteMeasurements$deleting all measurements by userid when it exists, returns a 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting all measurements by userid when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:279)
-Caused by: java.lang.ClassNotFoundException: org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements$deleting all measurements by userid when it exists, returns a 204 response$$inlined$jsonToObject$1
-	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting all measurements by userid when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:279)
+updating an measurement by measurement id when it exists, returns 204 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it exists, returns 204 response(MeasurementTrackerAPITest.kt:172)
 
-deleting an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 0.051 s  <<< FAILURE!
-java.lang.AssertionError: expected:<404> but was:<500>
+updating an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$UpdateMeasurements.updating an measurement by measurement id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:157)
+
+deleting an measurement by id when it exists, returns a 204 response  Time elapsed: 0.015 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by id when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:218)
+
+deleting all measurements by userid when it exists, returns a 204 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
+	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting all measurements by userid when it exists, returns a 204 response(MeasurementTrackerAPITest.kt:236)
+
+deleting an measurement by measurement id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
 	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting an measurement by measurement id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:205)
 
-deleting measurements by user id when it doesn't exist, returns a 404 response  Time elapsed: 0.018 s  <<< FAILURE!
-java.lang.AssertionError: expected:<404> but was:<500>
+deleting measurements by user id when it doesn't exist, returns a 404 response  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.wit.helpers.FixturesKt
 	at org.wit.controllers.MeasurementTrackerAPITest$DeleteMeasurements.deleting measurements by user id when it doesn't exist, returns a 404 response(MeasurementTrackerAPITest.kt:211)
 
