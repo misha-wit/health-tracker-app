@@ -23,35 +23,52 @@
         </div>
       </div>
       <div class="card-body">
-        <form>
+        <form id="addActivities">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="input-activity-id">Activity ID</span>
+              <span class="input-group-text" style="width: 120px;" id="input-activity-id">Activity ID</span>
             </div>
             <input type="number" class="form-control" v-model="activity.id" description="id" readonly placeholder="Id"/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="input-activity-description">Description</span>
+              <span class="input-group-text" style="width: 120px;" id="input-activities-userId">User Id</span>
             </div>
-            <input type="text" class="form-control" v-model="activity.description" description="description" placeholder="Description"/>
+            <input type="number" class="form-control" v-model="formData.userId?formData.userId:activities.userId" name="userId" readonly placeholder="userId"/>
+            <select v-model="formData.userId" name="userId" class="form-control" v-model="activities.userId">
+              <option v-for="user in users" :value="user.id">{{user.name}}</option>
+            </select>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="input-activity-description">Description</span>
+              <span class="input-group-text" style="width: 120px;" id="input-activities-description">Description</span>
             </div>
-            <input type="description" class="form-control" v-model="activity.description" description="description" placeholder="Description"/>
+            <input type="text" class="form-control" v-model="activities.description" name="description" list="ActivityList" placeholder="Description"/>
+            <datalist id="ActivityList">
+              <option value="Bicycle riding">
+              <option value="Dancing">
+              <option value="Hiking">
+              <option value="Running">
+              <option value="Skipping">
+              <option value="Stair Training">
+              <option value="Squat Jacks">
+              <option value="Swimming">
+              <option value="Walking">
+              <option value="Weight Lifting">
+            </datalist>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" style="width: 120px;" id="input-activities-duration">Duration</span>
+            </div>
+            <input type="number" class="form-control" v-model="activities.duration" placeholder="Duration" name="duration">
+            &nbsp&nbsp
+            <div class="input-group-prepend ">
+              <span class="input-group-text" style="width: 120px;" id="input-activities-calories">Calories</span>
+            </div>
+            <input type="number" class="form-control" v-model="activities.calories" placeholder="Calories Burned" name="calories">
           </div>
         </form>
-      </div>
-      <div class="card-footer text-left">
-        <p  v-if="activities.length == 0"> No activities yet...</p>
-        <p  v-if="activities.length > 0"> Activities so far...</p>
-        <ul>
-          <li v-for="activity in activities">
-            {{ activity.description }} for {{ activity.duration }} minutes
-          </li>
-        </ul>
       </div>
     </div>
   </app-layout>
@@ -64,6 +81,8 @@ Vue.component("activity-profile", {
     activity: null,
     noActivityFound: false,
     activities: [],
+    users: [],
+    formData: []
   }),
   created: function () {
     const activityId = this.$javalin.pathParams["activity-id"];
@@ -74,38 +93,40 @@ Vue.component("activity-profile", {
           console.log("No activity found for id passed in the path parameter: " + error)
           this.noActivityFound = true
         })
-    axios.get(url + `/activities`)
-        .then(res => this.activities = res.data)
-        .catch(error => {
-          console.log("No activities added yet (this is ok): " + error)
-        })
+    axios.get("/api/users")
+        .then(res => this.users = res.data)
+        .catch(() => alert("Error while fetching users"));
   },
   methods: {
-    updateActivity: function () {
-      const activityId = this.$javalin.pathParams["activity-id"];
-      const url = `/api/activities/${activityId}`
-      axios.patch(url,
-          {
-            description: this.activity.description,
-            description: this.activity.description
-          })
-          .then(response =>
-              this.activity.push(response.data))
-          .catch(error => {
-            console.log(error)
-          })
-      alert("Activity updated!")
-    },
+  updateActivities: function () {
+    const activitiesId = this.$javalin.pathParams["activities-id"];
+    const url = `/api/activities/${activitiesId}`
+    const timestamp = new Date().toISOString().slice(0, 30);
+
+    axios.patch(url,
+        {
+          description: this.activities.description,
+          duration: this.activities.duration,
+          calories: this.activities.calories,
+          userId:this.formData.userId?this.formData.userId:this.activities.userId,
+          started:timestamp
+        })
+        .then(response =>
+            this.activities.push(response.data),window.location.href = '/activities')
+        .catch(error => {
+          console.log(error)
+        })
+    alert("Activities updated!")
+  },
     deleteActivity: function () {
-      if (confirm("Do you really want to delete?")) {
-        const activityId = this.$javalin.pathParams["activity-id"];
-        const url = `/api/activities/${activityId}`
+      if (confirm('Are you sure you want to delete this activities? This action cannot be undone.', 'Warning')) {
+        //activities confirmed delete
+        const activitiesId = activities.id;
+        const url = `/api/activities/${activitiesId}`;
         axios.delete(url)
-            .then(response => {
-              alert("Activity deleted")
-              //display the /activities endpoint
-              window.location.href = '/activities';
-            })
+            .then(response =>
+                //delete from the local state so Vue will reload list automatically
+                this.activities.splice(index, 1).push(response.data))
             .catch(function (error) {
               console.log(error)
             });

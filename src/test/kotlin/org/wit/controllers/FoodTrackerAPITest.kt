@@ -5,7 +5,6 @@ import org.junit.Assert
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.wit.config.DbConfig
 import org.wit.domain.FoodDTO
 import org.wit.domain.UserDTO
 import org.wit.helpers.*
