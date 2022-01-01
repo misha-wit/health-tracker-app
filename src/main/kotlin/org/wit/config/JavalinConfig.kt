@@ -72,6 +72,11 @@ class JavalinConfig {
             //VUE for Activities
             get("/activities", VueComponent("<activity-overview></activity-overview>"))
             get("/activities/:activity-id", VueComponent("<activity-profile></activity-profile>"))
+
+            //VUE for Foods
+            get("/foods", VueComponent("<food-overview></food-overview>"))
+            get("/foods/:food-id", VueComponent("<food-profile></food-profile>"))
+
         }
     }
 
