@@ -23,6 +23,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/foods">Foods</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/analysis">Analysis</a>
+            </li>
           </ul>
         </div>
       </nav>
