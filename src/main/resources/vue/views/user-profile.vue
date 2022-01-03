@@ -90,7 +90,7 @@ Vue.component("user-profile", {
             email: this.user.email
           })
           .then(response =>
-              this.user.push(response.data))
+              this.user.push(response.data),window.location.href = '/users')
           .catch(error => {
             console.log(error)
           })

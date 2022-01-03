@@ -5,7 +5,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col-6">
-            <i class="fas fa-running"></i>Activities
+            Activities
           </div>
           <div class="col" align="right">
             <button rel="tooltip" title="Add"
@@ -138,6 +138,7 @@ Vue.component("activity-overview", {
           .then(response => {
             this.activities.push(response.data)
             this.hideForm= true;
+            this.fetchActivities()
           })
           .catch(error => {
             console.log(error)

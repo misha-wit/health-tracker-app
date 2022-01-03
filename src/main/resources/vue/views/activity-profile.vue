@@ -34,8 +34,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text" style="width: 120px;" id="input-activities-userId">User Id</span>
             </div>
-            <input type="number" class="form-control" v-model="formData.userId?formData.userId:activities.userId" name="userId" readonly placeholder="userId"/>
-            <select v-model="formData.userId" name="userId" class="form-control" v-model="activities.userId">
+            <input type="number" class="form-control" v-model="activity.userId" name="userId" readonly placeholder="userId"/>
+            <select  name="userId" class="form-control" v-model="activity.userId">
               <option v-for="user in users" :value="user.id">{{user.name}}</option>
             </select>
           </div>
@@ -43,7 +43,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" style="width: 120px;" id="input-activities-description">Description</span>
             </div>
-            <input type="text" class="form-control" v-model="activities.description" name="description" list="ActivityList" placeholder="Description"/>
+            <input type="text" class="form-control" v-model="activity.description" name="description" list="ActivityList" placeholder="Description"/>
             <datalist id="ActivityList">
               <option value="Bicycle riding">
               <option value="Dancing">
@@ -61,12 +61,12 @@
             <div class="input-group-prepend ">
               <span class="input-group-text" style="width: 120px;" id="input-activities-duration">Duration</span>
             </div>
-            <input type="number" class="form-control" v-model="activities.duration" placeholder="Duration" name="duration">
+            <input type="number" class="form-control" v-model="activity.duration" placeholder="Duration" name="duration">
             &nbsp&nbsp
             <div class="input-group-prepend ">
               <span class="input-group-text" style="width: 120px;" id="input-activities-calories">Calories</span>
             </div>
-            <input type="number" class="form-control" v-model="activities.calories" placeholder="Calories Burned" name="calories">
+            <input type="number" class="form-control" v-model="activity.calories" placeholder="Calories Burned" name="calories">
           </div>
         </form>
       </div>
@@ -98,30 +98,31 @@ Vue.component("activity-profile", {
         .catch(() => alert("Error while fetching users"));
   },
   methods: {
-  updateActivities: function () {
-    const activitiesId = this.$javalin.pathParams["activities-id"];
-    const url = `/api/activities/${activitiesId}`
+    updateActivity : function () {
+    const activityid = this.$javalin.pathParams["activity-id"];
+    const url = `/api/activities/${activityid}`
     const timestamp = new Date().toISOString().slice(0, 30);
-
+      // alert(this.activity.description)
     axios.patch(url,
         {
-          description: this.activities.description,
-          duration: this.activities.duration,
-          calories: this.activities.calories,
-          userId:this.formData.userId?this.formData.userId:this.activities.userId,
+          description: this.activity.description,
+          duration: this.activity.duration,
+          calories: this.activity.calories,
+          userId: this.activity.userId,
           started:timestamp
         })
         .then(response =>
             this.activities.push(response.data),window.location.href = '/activities')
+
         .catch(error => {
           console.log(error)
         })
-    alert("Activities updated!")
+      alert("Activity updated!")
   },
     deleteActivity: function () {
       if (confirm('Are you sure you want to delete this activities? This action cannot be undone.', 'Warning')) {
         //activities confirmed delete
-        const activitiesId = activities.id;
+        const activitiesId = this.$javalin.pathParams["activity-id"];
         const url = `/api/activities/${activitiesId}`;
         axios.delete(url)
             .then(response =>

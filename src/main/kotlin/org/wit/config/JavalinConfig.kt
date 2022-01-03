@@ -77,6 +77,10 @@ class JavalinConfig {
             get("/foods", VueComponent("<food-overview></food-overview>"))
             get("/foods/:food-id", VueComponent("<food-profile></food-profile>"))
 
+            //VUE for ANALYSIS
+
+            get("/analysis", VueComponent("<analysis-overview></analysis-overview>"))
+
         }
     }
 
